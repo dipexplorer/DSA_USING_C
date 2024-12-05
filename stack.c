@@ -29,6 +29,14 @@ void push(struct Stack *s, int value){
     s->arr[s->top]=value;
 }
 
+void pop(struct Stack *s){
+    if(is_empty(s)){
+        printf("Stack Underflow\n");
+    }
+    printf("Element %d is poped.\n", s->top);
+    s->top--;
+}
+
 void print_stack(struct Stack *s){
     for(int i=s->top;i>=0;i--){
         printf("Element in stact is %d\n", s->arr[i]);
