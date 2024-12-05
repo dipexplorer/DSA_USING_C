@@ -1,70 +1,99 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-struct Stack{
+struct Stack
+{
     int size;
     int top;
     int *arr;
 };
 
-int is_full(struct Stack *s){
-    if(s->top == s->size){
+int is_full(struct Stack *s)
+{
+    if (s->top == s->size - 1)
+    {
         return 1;
     }
     return 0;
 }
 
-int is_empty(struct Stack *s){
-    if(s->top==-1){
+int is_empty(struct Stack *s)
+{
+    if (s->top == -1)
+    {
         return 1;
     }
     return 0;
 }
 
-void push(struct Stack *s, int value){
-    if(is_full(s)){
+void push_stack(struct Stack *s, int value)
+{
+    if (is_full(s))
+    {
         printf("Stack Overflow\n");
+        return; // Stop further execution if full
     }
     s->top++;
-    s->arr[s->top]=value;
+    s->arr[s->top] = value;
+    printf("Pushed %d to the stack.\n", value);
 }
 
-void pop(struct Stack *s){
-    if(is_empty(s)){
+void pop(struct Stack *s)
+{
+    if (is_empty(s))
+    {
         printf("Stack Underflow\n");
+        return; // Stop further execution if empty
     }
     printf("Element %d is poped.\n", s->top);
     s->top--;
 }
 
-void print_stack(struct Stack *s){
-    for(int i=s->top;i>=0;i--){
+void print_stack(struct Stack *s)
+{
+    for (int i = s->top; i >= 0; i--)
+    {
         printf("Element in stact is %d\n", s->arr[i]);
     }
 }
 
-int main(){
-    struct Stack *s=(struct Stack *)malloc(sizeof(struct Stack));
+int main()
+{
+    struct Stack *s = (struct Stack *)malloc(sizeof(struct Stack));
     printf("Enter the stack size:\n");
     scanf("%d", s->size);
-    s->arr=(int *)malloc(s->size*sizeof(int));
-    s->top=-1;
+    s->arr = (int *)malloc(s->size * sizeof(int));
+    s->top = -1;
 
-    int choice=0;
-    do{
+    char choice;
+    do
+    {
+        int operation;
         int value;
-        printf("Enter element: ");
-        scanf("%d", &value);
-        push(s, value);
-        printf("Do you want to continue (1/0): ");
-        scanf("%d", &choice);
-    }while (choice != 0);
+        printf("Choose operation (push(1), pop(0), print(5)): ");
+        scanf("%d", &operation);
+        switch (operation)
+        {
+        case 1:
+            printf("Enter the element to push: ");
+            scanf("%d", &value);
+            push_stack(s, value);
+            break;
+        case 0:
+            pop(s);
+            break;
+        case 5:
+            print_stack(s);
+            break;
+        default:
+            printf("Invalid operation\n");
+            break;
+        }
+        printf("Do you want to continue (y/n): ");
+        scanf(" %c", &choice); // Added space to handle newline character
+    } while (choice == 'y' || choice == 'Y');
 
-    print_stack(s);
-
-    printf("after deleting");
-    pop(s);
-    print_stack(s);
-    
+    free(s->arr);
+    free(s);
     return 0;
 }
