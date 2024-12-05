@@ -62,5 +62,9 @@ int main(){
 
     print_stack(s);
 
+    printf("after deleting");
+    pop(s);
+    print_stack(s);
+    
     return 0;
 }
