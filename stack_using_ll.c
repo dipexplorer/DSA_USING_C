@@ -49,6 +49,21 @@ void peek(struct Node* head){
     printf("Top element of stack is %d\n", head->data);
 }
 
+// Calculate the depth of the stack
+void depth(struct Node* head) {
+    if (isEmpty(head)) {
+        printf("Stack is empty. Depth is 0.\n");
+        return;
+    }
+
+    struct Node* ptr = head;
+    while (ptr->next!= NULL) {
+        ptr = ptr->next;
+    }
+
+    printf("Data at the first node is %d\n", ptr->data);
+}
+
 void print_stack(struct Node *head)
 {
     struct Node *temp = head;
@@ -67,7 +82,7 @@ int main()
     int data;
     do
     {
-        printf("\n1. Push\n2. Pop\n3. Display\n4. Top\n5. Display \nEnter your choice: ");
+        printf("\n1. Push\n2. Pop\n3. Display\n4. Top\n5. Depth\nEnter your choice: ");
         scanf("%d", &choice);
         switch (choice)
         {
@@ -81,11 +96,13 @@ int main()
             break;
         case 3:
             print_stack(head);
-            break;
-            
+            break;  
         case 4:
-        peek(head);
-        break;
+            peek(head);
+            break;
+        case 5:
+            depth(head);
+            break;
         default:
             break;
         }
