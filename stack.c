@@ -49,6 +49,14 @@ void pop(struct Stack *s)
     s->top--;
 }
 
+void peek(struct Stack *s) {
+    if(is_empty(s)){
+        printf("Stack is empty.\n");
+        return; // Stop further execution if empty
+    }
+    printf("Top element is %d\n", s->arr[s->top]);
+}
+
 void print_stack(struct Stack *s)
 {
     for (int i = s->top; i >= 0; i--)
@@ -81,6 +89,9 @@ int main()
             break;
         case 0:
             pop(s);
+            break;
+        case 2:
+            peek(s);
             break;
         case 5:
             print_stack(s);
