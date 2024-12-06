@@ -78,7 +78,7 @@ int main()
     {
         int operation;
         int value;
-        printf("Choose operation (push(1), pop(0), print(5)): ");
+        printf("Choose operation (push(1), pop(0),peek(2) print(5)): ");
         scanf("%d", &operation);
         switch (operation)
         {
